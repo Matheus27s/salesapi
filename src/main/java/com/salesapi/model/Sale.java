@@ -27,9 +27,9 @@ public class Sale {
 	
     private Float value;
 	
- //   @ManyToOne
-//	@JoinColumn(name = "seller_id")
-//	private Seller seller;	
+    @ManyToOne
+	@JoinColumn(name = "seller_id")
+	private Seller seller;	
 	
 	public UUID getId() {
 		return id;
@@ -55,11 +55,11 @@ public class Sale {
 		this.value = value;
 	}
 
-	//public Seller getSeller() {
-	//	return seller;
-	//}
+	public Seller getSeller() {
+		return seller;
+	}
 
-	//public void setSeller(Seller seller) {
-	//	this.seller = seller;
-	//}
+	public void setSeller(Seller seller) {
+		this.seller = seller;
+	}
 }
