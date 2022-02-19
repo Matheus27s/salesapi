@@ -24,11 +24,9 @@ public class SaleService {
 	public ResponseEntity<?> create(SaleRequest saleRequest) {		
 		try {
 			Seller seller = sellerService.findSeller(saleRequest.getSellerName());		
-			
 			if(seller == null) {
 				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Vendedor não encontrado.");
 			}
-			
 		    Sale sale = new Sale();	
 		    sale.setDate(DataConvertionUtils.getLocalDate(saleRequest.getDate()));
 		    sale.setValue(saleRequest.getValue());

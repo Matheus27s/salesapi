@@ -21,7 +21,6 @@ public class SellerService {
 	
 	public ResponseEntity<?> create(SellerRequest sellerRequest) {		
 		try {
-			
 			Seller seller = new Seller();
 			seller.setName(sellerRequest.getName());
 			seller = repository.save(seller);		    
@@ -32,13 +31,16 @@ public class SellerService {
 	}
 
 	public Seller findSeller(String sellerName) {
-		Seller seller = repository.findOneByName(sellerName);
-		return seller;
+		return repository.findOneByName(sellerName);
 	}
 	
 	public ResponseEntity<?> findAllSeller(String start, String end) {
-		List<SellerResponseDTO> list = repository.findAllSeller(DataConvertionUtils.getLocalDate(start), DataConvertionUtils.getLocalDate(end));
-		return new ResponseEntity<List<SellerResponseDTO>>(list, HttpStatus.OK);
+		try {
+			List<SellerResponseDTO> list = repository.findAllSeller(DataConvertionUtils.getLocalDate(start), DataConvertionUtils.getLocalDate(end));
+			return new ResponseEntity<List<SellerResponseDTO>>(list, HttpStatus.OK);
+		} catch(Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Erro ao listar vendedores.");
+		}
 	}
 
 }
